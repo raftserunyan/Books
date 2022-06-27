@@ -11,7 +11,7 @@ namespace Books.Models
         public string cartnumber { get; set; }
         public string mail { get; set; }
         public string phone  { get; set; }
-        public BookModel books { get; set; } 
 
+        public List<UserBookKap> UserBookKaps { get; set; }
     }
 }

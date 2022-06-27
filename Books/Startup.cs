@@ -38,7 +38,12 @@ namespace Books
             services.AddDbContext<BooksDBContext>(options => options.UseSqlServer(@"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=BooksDb;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False"));
 
             services.AddScoped<BookRepository>();
+            services.AddScoped<UserRepository>();
+            services.AddScoped<UserBookKapRepository>();
+
             services.AddScoped<BookService>();
+            services.AddScoped<UserService>();
+            services.AddScoped<UserBookKapService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

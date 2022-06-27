@@ -10,7 +10,7 @@ namespace Books.Data
         }
 
         public DbSet<BookModel> Books { get; set; }
-        public DbSet<User> user { get; set; }
-
+        public DbSet<User> Users { get; set; }
+        public DbSet<UserBookKap> UserBookKaps { get; set; }
     }
 }
