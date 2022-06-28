@@ -4,20 +4,37 @@ using Books.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Books.Migrations
 {
     [DbContext(typeof(BooksDBContext))]
-    partial class BooksDBContextModelSnapshot : ModelSnapshot
+    [Migration("20220628182017_dbd")]
+    partial class dbd
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("ProductVersion", "5.0.17")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+            modelBuilder.Entity("BookModelUser", b =>
+                {
+                    b.Property<int>("BooksId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Usersid")
+                        .HasColumnType("int");
+
+                    b.HasKey("BooksId", "Usersid");
+
+                    b.HasIndex("Usersid");
+
+                    b.ToTable("BookModelUser");
+                });
 
             modelBuilder.Entity("Books.Models.BookModel", b =>
                 {
@@ -53,12 +70,7 @@ namespace Books.Migrations
                     b.Property<int>("TotalCount")
                         .HasColumnType("int");
 
-                    b.Property<int?>("Userid")
-                        .HasColumnType("int");
-
                     b.HasKey("Id");
-
-                    b.HasIndex("Userid");
 
                     b.ToTable("Books");
                 });
@@ -115,11 +127,19 @@ namespace Books.Migrations
                     b.ToTable("UserBookKaps");
                 });
 
-            modelBuilder.Entity("Books.Models.BookModel", b =>
+            modelBuilder.Entity("BookModelUser", b =>
                 {
+                    b.HasOne("Books.Models.BookModel", null)
+                        .WithMany()
+                        .HasForeignKey("BooksId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("Books.Models.User", null)
-                        .WithMany("Books")
-                        .HasForeignKey("Userid");
+                        .WithMany()
+                        .HasForeignKey("Usersid")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("Books.Models.UserBookKap", b =>
@@ -139,11 +159,6 @@ namespace Books.Migrations
                     b.Navigation("Book");
 
                     b.Navigation("User");
-                });
-
-            modelBuilder.Entity("Books.Models.User", b =>
-                {
-                    b.Navigation("Books");
                 });
 #pragma warning restore 612, 618
         }

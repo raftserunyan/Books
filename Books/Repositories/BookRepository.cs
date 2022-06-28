@@ -25,5 +25,10 @@ namespace Books.Repositories
             context.Add(newBook);
             context.SaveChanges();
         }
+
+        public BookModel GetById(int bookId)
+        {
+            return context.Books.FirstOrDefault(x => x.Id == bookId);
+        }
     }
 }
