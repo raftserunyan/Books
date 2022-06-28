@@ -21,10 +21,24 @@ namespace Books.Controllers
             return Ok(userService.GetAll());
         }
 
+        [HttpGet("{name}")]
+        public IActionResult GetUserBooksByUserName(string name)
+        {
+            return Ok(userService.GetAllWithBooksByName(name));
+        }
+
         [HttpPost]
         public IActionResult Add(User user)
         {
             userService.Add(user);
+
+            return Ok();
+        }
+
+        [HttpPost("{userId}/addBook/{bookId}")]
+        public IActionResult AddBook(int userId, int bookId)
+        {
+            userService.AddBook(userId, bookId);
 
             return Ok();
         }

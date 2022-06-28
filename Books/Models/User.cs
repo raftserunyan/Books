@@ -12,6 +12,6 @@ namespace Books.Models
         public string mail { get; set; }
         public string phone  { get; set; }
 
-        public List<UserBookKap> UserBookKaps { get; set; }
+        public List<BookModel> Books { get; set; }
     }
 }

@@ -14,7 +14,5 @@ namespace Books.Models
         public int AvailibleForBorrowngCount { get; set; }
         public int AvailibleForUsingInLibraryCount { get; set; }
         public string Genre { get; set; }
-
-        public List<UserBookKap> UserBookKaps { get; set; }
     }
 }
